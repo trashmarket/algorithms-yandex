@@ -12,6 +12,7 @@ export const StringComponent: React.FC = () => {
   const [inputValue, setInputValue] = useState<LetterStep[]>([]);
   const [startEnd, setStartEnd] = useState<any[]>([null, null]);
   const [loder, setLoder] = useState(false);
+  const [disable, setDisable] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
@@ -38,13 +39,18 @@ export const StringComponent: React.FC = () => {
             return newArr;
           });
         }
-          if (startEnd[0] === startEnd[1]) {
-          setInputValue( (numArr) => {
-            let newArr = [...numArr];
-            newArr[startEnd[0]].state = ElementStates.Modified;
-            return newArr;
-          })
-          setLoder(false);
+
+        if ( startEnd[0] >  startEnd[1]) {
+          setLoder(false)
+        }
+
+        if (startEnd[0] === startEnd[1]) {
+         setInputValue( (numArr) => {
+           let newArr = [...numArr];
+           newArr[startEnd[0]].state = ElementStates.Modified;
+           return newArr;
+         })
+         setLoder(false);
         }
       }
  
@@ -94,12 +100,20 @@ export const StringComponent: React.FC = () => {
     });
   };
 
+  const handlerOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value.length !== 0) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+  }
+
   return (
     <SolutionLayout title="Строка">
       <div className={styles.wrapper}>
         <form className={styles.inputWarapper} onSubmit={onSubmit}>
-          <Input  max={11} isLimitText={true} maxLength={11} name='textFied' />
-          <Button text="Развернуть" type='submit' isLoader={loder}/>
+          <Input  max={11} isLimitText={true} maxLength={11} name='textFied' onChange={handlerOnChange}/>
+          <Button text="Развернуть" type='submit' isLoader={loder} disabled={disable}/>
         </form> 
         <div className={styles.circleConteiner}>
           {inputValue.map((item, index) => <Circle letter={item.letter} state={item.state} key={item.index}/>)} 
