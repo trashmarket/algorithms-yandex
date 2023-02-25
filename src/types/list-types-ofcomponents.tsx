@@ -5,3 +5,8 @@ export interface LetterStep {
     state?: ElementStates;
     index: number
 }
+
+export interface FibStep {
+    index: number,
+    fibNum: number
+}
