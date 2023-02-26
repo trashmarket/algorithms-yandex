@@ -6,7 +6,7 @@ export interface LetterStep {
     index: number
 }
 
-export interface FibStep {
+export interface TFibStep {
     index: number,
     fibNum: number
 }

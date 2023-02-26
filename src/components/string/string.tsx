@@ -8,6 +8,7 @@ import { LetterStep } from '../../types/list-types-ofcomponents';
 import { ElementStates } from '../../types/element-states';
 import styles from "./string.module.css";
 import { Wrapper } from "../wrapper/wrapper";
+import { checkVal } from "../../utils/utils";
 
 export const StringComponent: React.FC = () => {
   const [inputValue, setInputValue] = useState<LetterStep[]>([]);
@@ -102,11 +103,7 @@ export const StringComponent: React.FC = () => {
   };
 
   const handlerOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length !== 0) {
-      setDisable(false);
-    } else {
-      setDisable(true);
-    }
+    checkVal(setDisable, event)
   }
 
   return (
