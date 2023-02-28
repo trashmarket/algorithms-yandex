@@ -10,3 +10,9 @@ export interface TFibStep {
     index: number,
     fibNum: number
 }
+
+export interface IColumn {
+    index: number,
+    state: ElementStates
+    keuId: number
+}
