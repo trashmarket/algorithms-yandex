@@ -1,0 +1,28 @@
+.form {
+    display: flex;
+    justify-content: space-between;
+    width: 56vw;
+    align-items: baseline;
+    margin: auto;
+}
+
+.fieldset {
+    display: flex;
+    border: none;
+    padding: 0;
+    justify-content: space-between;
+    width: 143vh;
+    margin-bottom: 50px;
+}
+
+.fieldset button {
+    margin-left: 20px;
+}
+
+.circleContainer {
+    display: flex;
+}
+
+.circleContainer div {
+    margin-left: 16 px;
+}
