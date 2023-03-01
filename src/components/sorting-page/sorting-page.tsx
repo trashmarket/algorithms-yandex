@@ -43,10 +43,13 @@ export const SortingPage: React.FC = () => {
   const [columnArr, setColumnArr] = useState<IColumn[]>([]);
   const [selectionSort, setSelectionSort] = useState(true);
   const [bubbleSort, setbubleSort] = useState(false);
+  const [disable, setDisable] = useState(false);
+  const [diminutionLoder, setDiminutionLoder] = useState(false);
+  const [ascendingLoder, setAscendingLoder] = useState(false);
 
   const handlerOnClickMakerArr = (e: any) => {
     e.preventDefault();
-    const num = getRandomIntInclusive(5, 6);
+    const num = getRandomIntInclusive(3, 17);
     let numArr: IColumn[] = [];
     let i = 0;
 
@@ -65,7 +68,7 @@ export const SortingPage: React.FC = () => {
     setColumnArr(numArr);
   };
 
-  const sortOfBubble = (arr: Array<IColumn>) => {
+  const sortOfBubble = (arr: Array<IColumn>, ascending: boolean) => {
    const {length} = arr;
    let i = 0;
    let j = 0;
@@ -73,11 +76,19 @@ export const SortingPage: React.FC = () => {
    const sorting = () => {
     if (i < length) {
       if (j < length - i - 1) {
-        setColumnArr( arr => paintingCouple(j, jPluse, ElementStates.Changing, arr)) 
-        if (arr[j].index > arr[jPluse].index){
-          arr = swap(arr, j, jPluse);
-          setColumnArr(arr);
-        }
+        setColumnArr( arr => paintingCouple(j, jPluse, ElementStates.Changing, arr))
+        if (ascending) {
+          if (arr[j].index > arr[jPluse].index){
+            arr = swap(arr, j, jPluse);
+            setColumnArr(arr);
+          }
+        } else {
+          if (arr[j].index < arr[jPluse].index){
+            arr = swap(arr, j, jPluse);
+            setColumnArr(arr);
+          }
+        } 
+
         j++;
         jPluse = j + 1
         setTimeout(()=> sorting(), 500);
@@ -88,6 +99,10 @@ export const SortingPage: React.FC = () => {
         jPluse = 1;
         setTimeout(()=>sorting(), 500);
       }
+    } else {
+      setAscendingLoder(false);
+      setDisable(false);
+      setDiminutionLoder(false);
     }
    }
    setTimeout(() => sorting(), 500);
@@ -137,7 +152,12 @@ export const SortingPage: React.FC = () => {
             sorting();
           }, 500);
         }
+      } else {
+        setAscendingLoder(false);
+        setDisable(false);
+        setDiminutionLoder(false);
       }
+
     };
     setTimeout(() => {
       sorting();
@@ -146,14 +166,18 @@ export const SortingPage: React.FC = () => {
 
   const handelerClickAscending = (e: any) => {
     e.preventDefault();
-    bubbleSort && sortOfBubble(columnArr);
+    bubbleSort && sortOfBubble(columnArr, true);
     selectionSort && sortOfSelection(true);
+    setAscendingLoder(true);
+    setDisable(true);
   };
 
   const handelerClickDiminution = (e: any) => {
     e.preventDefault();
-
+    bubbleSort && sortOfBubble(columnArr, false);
     selectionSort && sortOfSelection(false);
+    setDiminutionLoder(true);
+    setDisable(true);
   };
 
   return (
@@ -183,6 +207,8 @@ export const SortingPage: React.FC = () => {
               sorting={Direction.Ascending}
               extraClass="mr-6"
               onClick={handelerClickAscending}
+              disabled={disable}
+              isLoader={ascendingLoder}
             />
             <Button
               type="submit"
@@ -190,12 +216,15 @@ export const SortingPage: React.FC = () => {
               sorting={Direction.Descending}
               extraClass="mr-40"
               onClick={handelerClickDiminution}
+              disabled={disable}
+              isLoader={diminutionLoder}
             />
             <Button
               type="submit"
               text="Новый массив"
               name="makerArr"
               onClick={handlerOnClickMakerArr}
+              disabled={disable}
             />
           </fieldset>
         </form>
