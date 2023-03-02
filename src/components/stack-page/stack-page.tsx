@@ -18,7 +18,6 @@ export const StackPage: React.FC = () => {
   const [stack, setStack] = useState<IStack<string>>(new Stack<string>());
   const [value, setValue] = useState("");
   const [chang, setChang] = useState(true);
-  const [buttoAddDis, setbuttonDis] = useState(true);
 
   const pushStack = () => {
     if (value !== "") {
