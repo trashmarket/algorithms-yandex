@@ -8,11 +8,7 @@ import { Circle } from "../ui/circle/circle";
 import { Input } from "../ui/input/input";
 import styles from "./stack-page.module.css";
 import { ElementStates } from "../../types/element-states";
-
-const setState = (stack: IStack<string>, set: Dispatch<SetStateAction<IStack<string>>>) => {
-  const newStack = { ...stack };
-  set(newStack);
-}
+import { setState } from "../../utils/utils";
 
 export const StackPage: React.FC = () => {
   const [stack, setStack] = useState<IStack<string>>(new Stack<string>());

@@ -8,14 +8,7 @@ import { Queue, IQueue } from "./queue-class";
 import { Circle } from "../ui/circle/circle";
 import { ElementStates } from "../../types/element-states";
 import { DELAY_IN_MS } from "../../constants/delays";
-
-const setState = (
-  stack: IQueue<string>,
-  set: Dispatch<SetStateAction<IQueue<string>>>
-) => {
-  const newStack = { ...stack };
-  set(newStack);
-};
+import { setState } from "../../utils/utils";
 
 export const QueuePage: React.FC = () => {
   const [queue, setQueue] = useState<IQueue<string>>(new Queue<string>(4));

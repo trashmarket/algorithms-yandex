@@ -22,3 +22,7 @@ export const swap = (arr: Array<any>, firstIndex: number, secondIndex: number) =
     return newArr
   };
   
+ export const setState = (stack: any, set: any) => {
+    const newStack = { ...stack };
+    set(newStack);
+  };

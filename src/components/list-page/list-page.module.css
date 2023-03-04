@@ -25,14 +25,26 @@
     margin-bottom: 98px;
 }
 
-.fieldset:first-child * {
+.fieldset input {
+    width: auto;
+}
+
+.fieldset:first-child button {
     width: 14vw;
+}
+
+.fieldset div:first-child {
+    width: auto;
 }
 
 .fieldset:nth-child(2) button {
-    width: 29vw
+    width: 28vw
 }
 
-.fieldset:nth-child(2) div {
+/* .fieldset:nth-child(2) div {
     width: 14vw;
 }
+
+.fieldset:nth-child(2) div:nth-child(1) {
+    width: 16vw;
+} */
