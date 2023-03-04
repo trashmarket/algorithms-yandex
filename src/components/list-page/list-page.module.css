@@ -1,0 +1,38 @@
+.containerCircle {
+    display: flex;
+    align-items: center ;
+}
+
+.containerCircle div {
+    display: flex;
+    align-items: center;
+}
+
+.fieldset {
+    display: flex;
+    border: none;
+    width: 74vw;
+    padding: 0;
+    justify-content: space-between  ;
+}
+
+.fieldset:first-child {
+    margin-bottom: 38px;
+
+}
+
+.fieldset:last-child {
+    margin-bottom: 98px;
+}
+
+.fieldset:first-child * {
+    width: 14vw;
+}
+
+.fieldset:nth-child(2) button {
+    width: 29vw
+}
+
+.fieldset:nth-child(2) div {
+    width: 14vw;
+}

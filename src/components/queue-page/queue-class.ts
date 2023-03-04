@@ -39,11 +39,9 @@ export interface IQueue<T> {
        else {
         this.container[this.head % this.size] = null;
         this.length--;
-        let h =  this.head + 1;
 
-        if (h <= this.length){
-          this.head++;
-        } 
+        this.head++;
+   
 
       }
       
