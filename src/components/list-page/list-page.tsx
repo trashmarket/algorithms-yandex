@@ -16,9 +16,20 @@ const setState = (stack: any, set: any) => {
   set(newStack);
 };
 
-const appendBeforeOrAfter = (linkedList:any, setCyrcle:any, setState:any, setLinked:any ) => {
-
-}
+const appendBeforeOrAfter = ({ ...props }, isHead: boolean) => {
+  if (isHead) {
+    props.linkedList.appendHead(props.textInput);
+  } else {
+    props.linkedList.appendTail(props.textInput);
+  } 
+  props.setcircleHead(null);
+  props.setcircleTail(null);
+  setState(props.linkedList, props.setLinked);
+  props.setIndexModified(props.modifiedProp);
+  setTimeout(() => {
+    props.setIndexModified(null);
+  }, 500);
+};
 
 export const ListPage: React.FC = () => {
   const [linkedList, setLinked] = useState(
@@ -28,10 +39,18 @@ export const ListPage: React.FC = () => {
   const [circleTail, setcircleTail] = useState<CircleProps | null>(null);
   const [textInput, setTextInput] = useState("");
   const [indexModified, setIndexModified] = useState<number | null>(null);
+  const [currentIndex, setCurrentIndex] = useState<string>("");
+  const [maxChanginIndex, setMaxChengin] = useState<number | null>(null);
+  const [markerDell, setMarkerDell] = useState<number | null>(null);
 
   const handlerChange = (e: ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setTextInput(val);
+  };
+
+  const handlerChangeCurrentIndex = (e: ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setCurrentIndex(val);
   };
 
   const handlerClickHead = () => {
@@ -40,13 +59,16 @@ export const ListPage: React.FC = () => {
       letter: textInput,
     });
     setTimeout(() => {
-      linkedList.appendHead(textInput);
-      setcircleHead(null);
-      setState(linkedList, setLinked);
-      setIndexModified(0);
-      setTimeout(() => {
-        setIndexModified(null);
-      }, 500);
+      appendBeforeOrAfter({
+        linkedList,
+        textInput,
+        setcircleHead,
+        setcircleTail,
+        setState,
+        setLinked,
+        setIndexModified,
+        modifiedProp: 0,
+      }, true);
     }, 1000);
   };
 
@@ -56,31 +78,118 @@ export const ListPage: React.FC = () => {
       letter: textInput,
     });
     setTimeout(() => {
-      linkedList.appendTail(textInput);
-      setcircleTail(null);
-      setState(linkedList, setLinked);
-      setIndexModified(linkedList.getLength() - 1);
-      setTimeout(() => {
-        setIndexModified(null);
-      }, 500);
+      appendBeforeOrAfter({
+        linkedList,
+        textInput,
+        setcircleHead,
+        setcircleTail,
+        setState,
+        setLinked,
+        setIndexModified,
+        modifiedProp: linkedList.getLength(),
+      }, false);
     }, 1000);
   };
+
+  const handlerAddIndexCyrcle = () => {
+    const targetIndex = parseInt(currentIndex);
+    let i = 0;
+    let indexCyrle = 0;
+    setcircleHead({
+      letter: textInput,
+      index: indexCyrle,
+    });
+    const appendElem = () => {
+      if (i < targetIndex) {
+        setMaxChengin(i);
+        indexCyrle++;
+        i++;
+        setcircleHead({
+          letter: textInput,
+          index: indexCyrle,
+        });
+        setTimeout(() => appendElem(), 1000);
+      } else {
+        setcircleHead(null);
+        setMaxChengin(null);
+        linkedList.addByIndex(textInput, targetIndex);
+        setState(linkedList, setLinked);
+        setIndexModified(targetIndex);
+        setTimeout(() => setIndexModified(null), 500);
+      }
+    };
+    setTimeout(() => appendElem(), 1000);
+  };
+
+  const handlerDellIndexCyrcle = () => {
+    const targetIndex = parseInt(currentIndex);
+    let i = 0;
+    const dellEllem = () => {
+      if (i <= targetIndex) {
+        setMaxChengin(i);
+
+        if (i === targetIndex) {
+          setTimeout(() => {
+            setMarkerDell(i);
+            setMaxChengin(i - 1);
+
+            setTimeout(() => {
+              linkedList.deleteByIndex("hello", targetIndex);
+              setState(linkedList, setLinked);
+              setMarkerDell(null);
+              setMaxChengin(null);
+            }, 1000);
+          }, 1000);
+          return;
+        }
+
+        i++;
+
+        setTimeout(() => dellEllem(), 1000);
+      }
+    };
+
+    setTimeout(() => dellEllem(), 1000);
+  };
+
+  const handlerDellHead = () => {
+    setTimeout(()=>{
+      setMarkerDell(0);
+      setTimeout(() => {
+        linkedList.deleteByIndex("hello", 0);
+        setState(linkedList, setLinked);
+        setMarkerDell(null);
+      }, 1000)
+    }, 1000)
+  }
+
+  
 
   return (
     <SolutionLayout title="Связный список">
       <Wrapper>
         <form>
           <fieldset className={styles.fieldset}>
-            <Input onChange={handlerChange} />
+            <Input value={textInput} onChange={handlerChange} />
             <Button text="Добавить в head" onClick={handlerClickHead} />
-            <Button text="Добавить в tail" onClick={handlerClickTail}/>
-            <Button text="Удалить из head" />
+            <Button text="Добавить в tail" onClick={handlerClickTail} />
+            <Button text="Удалить из head" onClick={handlerDellHead}/>
             <Button text="Удалить из tail" />
           </fieldset>
           <fieldset className={styles.fieldset}>
-            <Input type="number" />
-            <Button text="Добавить по индексу" />
-            <Button text="Удалить по индексу" />
+            <Input
+              value={currentIndex}
+              onChange={handlerChangeCurrentIndex}
+              type="number"
+            />
+            <Button
+              text="Добавить по индексу"
+              onClick={handlerAddIndexCyrcle}
+            />
+            <Button
+              text="Удалить по индексу"
+              onClick={handlerDellIndexCyrcle}
+            />
           </fieldset>
         </form>
         <div className={styles.containerCircle}>
@@ -89,7 +198,11 @@ export const ListPage: React.FC = () => {
               <div key={nanoid()}>
                 <Circle
                   key={index}
-                  letter={item.value}
+                  letter={
+                    typeof markerDell === "number" && markerDell == index
+                      ? ""
+                      : item.value
+                  }
                   head={
                     circleHead && circleHead.index == index ? (
                       <Circle
@@ -109,12 +222,28 @@ export const ListPage: React.FC = () => {
                       ""
                     )
                   }
-                  tail={index == linkedList.getLength() - 1 ? "tail" : ""}
+                  tail={
+                    typeof markerDell === "number" && markerDell == index ? (
+                      <Circle
+                        isSmall={true}
+                        state={ElementStates.Changing}
+                        letter={item.value}
+                      />
+                    ) : index == linkedList.getLength() - 1 ? (
+                      "tail"
+                    ) : (
+                      ""
+                    )
+                  }
                   state={
-                    indexModified === index
+                    typeof maxChanginIndex === "number" &&
+                    index <= maxChanginIndex
+                      ? ElementStates.Changing
+                      : indexModified === index
                       ? ElementStates.Modified
                       : ElementStates.Default
                   }
+                  index={index}
                 />
                 {item.next && <ArrowIcon key={nanoid()} />}
               </div>

@@ -12,6 +12,8 @@ export class  LinkedListNode<T> {
     getLength: () => number;
     appendHead: (element: T) => void;
     appendTail:  (element: T) => void;
+    addByIndex: (element: T, index: number) => void;
+    deleteByIndex: (element: T, index: number) => void;
   }
   
   export class LinkedList<T> implements ILinkedList<T> {
@@ -40,6 +42,60 @@ export class  LinkedListNode<T> {
         }
         current.next = node
       }
+    }
+
+    addByIndex = (element: T, index: number) => {
+        const node = new LinkedListNode(element);
+
+        if (index === 0) {
+            // ваш код ...
+            let curr = this.head
+            this.head = node;
+            this.head.next = curr
+            
+          }
+        let curr = this.head;
+        let currIndex = 0;
+        let parentNode ;
+
+        while (currIndex < index) {
+            parentNode = curr 
+            curr = curr && curr.next;
+            currIndex++
+          }
+          const afterCurr = curr;
+
+          if (parentNode) {
+            parentNode.next = node;
+            if (parentNode.next) {
+              parentNode.next.next = afterCurr;
+            }
+          }
+        this.toArray();
+    }
+
+    deleteByIndex = (element: T , index: number) => {
+        let dummyHead = new LinkedListNode(element);
+        dummyHead.next = this.head;
+        
+        let curr: LinkedListNode<T> | null = dummyHead;
+        let prev = dummyHead;
+        let i = 0 ;
+        let newIndex = index + 1;
+
+        while(i <= newIndex && curr) {
+            if ( i === newIndex) {
+                prev.next = curr.next
+            } else {
+                
+                prev = curr;
+                curr = curr.next
+            }
+            i++;
+        }
+
+        this.head = dummyHead.next;
+        this.toArray();
     }
 
     appendTail = (element: T) => {
