@@ -1,7 +1,7 @@
 import React, { Dispatch , SetStateAction } from "react"
 
 export const checkVal = (setDisable: Dispatch<SetStateAction<boolean>>, event: any) => {
-    if (event.target.value.length !== 0) {
+    if (event.target.value.length !== 0 && !(/\s/).test(event.target.value)) {
         setDisable(false);
       } else {
         setDisable(true);

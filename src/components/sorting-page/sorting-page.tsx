@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, MouseEvent } from "react";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Wrapper } from "../wrapper/wrapper";
 import { RadioInput } from "../ui/radio-input/radio-input";
@@ -47,7 +47,7 @@ export const SortingPage: React.FC = () => {
   const [diminutionLoder, setDiminutionLoder] = useState(false);
   const [ascendingLoder, setAscendingLoder] = useState(false);
 
-  const handlerOnClickMakerArr = (e: any) => {
+  const handlerOnClickMakerArr = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const num = getRandomIntInclusive(3, 17);
     let numArr: IColumn[] = [];
@@ -164,7 +164,7 @@ export const SortingPage: React.FC = () => {
     }, 500);
   };
 
-  const handelerClickAscending = (e: any) => {
+  const handelerClickAscending = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     bubbleSort && sortOfBubble(columnArr, true);
     selectionSort && sortOfSelection(true);
@@ -172,7 +172,7 @@ export const SortingPage: React.FC = () => {
     setDisable(true);
   };
 
-  const handelerClickDiminution = (e: any) => {
+  const handelerClickDiminution = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     bubbleSort && sortOfBubble(columnArr, false);
     selectionSort && sortOfSelection(false);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, useEffect, ChangeEvent, Dispatch, SetStateAction, FormEvent } from "react";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import styles from './fibonacci-page.module.css';
 import { Wrapper } from "../wrapper/wrapper";
@@ -7,7 +7,14 @@ import { Button } from "../ui/button/button";
 import { DELAY_IN_MS } from "../../constants/delays";
 import { Circle } from "../ui/circle/circle";
 import { TFibStep } from "../../types/list-types-ofcomponents";
-import { checkVal } from "../../utils/utils";
+
+export const checkVal = (setDisable: Dispatch<SetStateAction<boolean>>, event: any) => {
+  if (event.target.value.length !== 0 && !(/\s/).test(event.target.value) && parseInt(event.target.value) < 20) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+}
 
 export const FibonacciPage: React.FC = () => {
   const [numArray, setNumArray] = useState<TFibStep[]>([]);
@@ -42,12 +49,12 @@ export const FibonacciPage: React.FC = () => {
     }, DELAY_IN_MS)
   }, [index, num])
 
-  const handlerSubmit = (event: any) => {
+  const handlerSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoder(true);
     setNumArray([]);
-    const form = event.target;
-    const num = parseInt(form.elements.numInput.value);
+    const form = event.target as HTMLFormElement ;;
+    const num = parseInt(form.numInput.value);
 
     setNum(num);
     setIndex(0);
@@ -65,7 +72,7 @@ export const FibonacciPage: React.FC = () => {
         <Button text="Развернуть" type='submit' isLoader={loder} disabled={disable} />
       </form>
       <div className={styles.circleConteiner}>
-        {numArray.map((item => <Circle letter={String(item.fibNum)} tail={String(item.index)  }/>))}        
+        {numArray.map((item => <Circle key={item.index} letter={String(item.fibNum)} tail={String(item.index)  }/>))}        
       </div>
      </Wrapper>
     </SolutionLayout>

@@ -9,8 +9,8 @@ import { Input } from "../ui/input/input";
 import styles from "./stack-page.module.css";
 import { ElementStates } from "../../types/element-states";
 import { setState } from "../../utils/utils";
-
-export const StackPage: React.FC = () => {
+// Этот комментарий на счет спинира в Очередь и Стек Там даже на видео посмотри его там нет просто********
+export const StackPage: React.FC = () => { 
   const [stack, setStack] = useState<IStack<string>>(new Stack<string>());
   const [value, setValue] = useState("");
   const [chang, setChang] = useState(true);
@@ -69,6 +69,7 @@ export const StackPage: React.FC = () => {
               index={index}
               state={stack.getSize() - 1 === index && chang ? ElementStates.Changing: ElementStates.Default}
               extraClass='ml-5'
+              key={index}
             />
           ))}
         </div>

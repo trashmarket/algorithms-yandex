@@ -59,11 +59,11 @@ export const StringComponent: React.FC = () => {
     }, DELAY_IN_MS);
   }, [startEnd]);
 
-  const onSubmit = (event: any) => {
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
  
-    const form = event.target;
-    const text: string =  form.elements.textFied.value;
+    const form = event.target as HTMLFormElement ;
+    const text: string =  form.textFied.value;
     const valueArray =  Array.from(text);
 
     const letterStep = valueArray.map(((item, index): LetterStep => {

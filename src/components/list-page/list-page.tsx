@@ -32,7 +32,11 @@ const removeLateral = (
   }, 1000);
 };
 
-const appendBeforeOrAfter = ({ ...props }, isHead: boolean, setLoder: Dispatch<SetStateAction<boolean>>) => {
+const appendBeforeOrAfter = (
+  { ...props },
+  isHead: boolean,
+  setLoder: Dispatch<SetStateAction<boolean>>
+) => {
   if (isHead) {
     props.linkedList.appendHead(props.textInput);
   } else {
@@ -45,7 +49,7 @@ const appendBeforeOrAfter = ({ ...props }, isHead: boolean, setLoder: Dispatch<S
   setTimeout(() => {
     props.setIndexModified(null);
     props.setButtonDisablet(false);
-    props.setTextInput('');
+    props.setTextInput("");
     setLoder(false);
   }, 500);
 };
@@ -87,7 +91,6 @@ export const ListPage: React.FC = () => {
       letter: textInput,
     });
     setTimeout(() => {
-      
       appendBeforeOrAfter(
         {
           linkedList,
@@ -108,8 +111,8 @@ export const ListPage: React.FC = () => {
   };
 
   const handlerClickTail = () => {
-    setLoderAddHead(true)
-    setButtonDisablet(true)
+    setLoderAddTail(true);
+    setButtonDisablet(true);
     setcircleTail({
       index: linkedList.getLength() - 1,
       letter: textInput,
@@ -126,7 +129,7 @@ export const ListPage: React.FC = () => {
           setIndexModified,
           setButtonDisablet,
           setTextInput,
-          
+
           modifiedProp: linkedList.getLength(),
         },
         false,
@@ -136,8 +139,8 @@ export const ListPage: React.FC = () => {
   };
 
   const handlerAddIndexCyrcle = () => {
-    setLoderAddbyIndex(true)
-    setButtonDisablet(true)
+    setLoderAddbyIndex(true);
+    setButtonDisablet(true);
     const targetIndex = parseInt(currentIndex);
     let i = 0;
     let indexCyrle = 0;
@@ -162,19 +165,20 @@ export const ListPage: React.FC = () => {
         setState(linkedList, setLinked);
         setIndexModified(targetIndex);
         setTimeout(() => {
-          setButtonDisablet(false)
-          setCurrentIndex('');
-          setTextInput('');
+          setButtonDisablet(false);
+          setCurrentIndex("");
+          setTextInput("");
           setLoderAddbyIndex(false);
-          setIndexModified(null)}, 500);
+          setIndexModified(null);
+        }, 500);
       }
     };
     setTimeout(() => appendElem(), 1000);
   };
 
   const handlerDellIndexCyrcle = () => {
-    setLoderRemoveByIndex(true)
-    setButtonDisablet(true)
+    setLoderRemoveByIndex(true);
+    setButtonDisablet(true);
     const targetIndex = parseInt(currentIndex);
     let i = 0;
     const dellEllem = () => {
@@ -191,10 +195,10 @@ export const ListPage: React.FC = () => {
               setState(linkedList, setLinked);
               setMarkerDell(null);
               setMaxChengin(null);
-              setCurrentIndex('');
-              setTextInput('');
+              setCurrentIndex("");
+              setTextInput("");
               setButtonDisablet(false);
-              setLoderRemoveByIndex(false)
+              setLoderRemoveByIndex(false);
             }, 1000);
           }, 1000);
           return;
@@ -246,7 +250,12 @@ export const ListPage: React.FC = () => {
       <Wrapper>
         <form>
           <fieldset className={styles.fieldset}>
-            <Input maxLength={4} isLimitText={true} value={textInput} onChange={handlerChange} />
+            <Input
+              maxLength={4}
+              isLimitText={true}
+              value={textInput}
+              onChange={handlerChange}
+            />
             <Button
               disabled={
                 buttonDisablet ? buttonDisablet : !textInput ? true : false
@@ -299,15 +308,30 @@ export const ListPage: React.FC = () => {
               onClick={handlerAddIndexCyrcle}
               isLoader={loderAddbyIndex}
               linkedList="big"
-              disabled={buttonDisablet? buttonDisablet : (!currentIndex || !textInput) ? true : false}
+              disabled={
+                buttonDisablet
+                  ? buttonDisablet
+                  : parseInt(currentIndex) > linkedList.getLength() - 1
+                  ? true
+                  : !currentIndex || !textInput
+                  ? true
+                  : false
+              }
             />
             <Button
               text="Удалить по индексу"
               isLoader={loderRemoveByindex}
-
               onClick={handlerDellIndexCyrcle}
               linkedList="big"
-              disabled={buttonDisablet? buttonDisablet : !currentIndex ? true : false}
+              disabled={
+                buttonDisablet
+                  ? buttonDisablet
+                  : parseInt(currentIndex) > linkedList.getLength() - 1
+                  ? true
+                  : !currentIndex
+                  ? true
+                  : false
+              }
             />
           </fieldset>
         </form>
