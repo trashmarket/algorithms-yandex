@@ -1,0 +1,21 @@
+.formWrapper {
+    width: 42vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.formWrapper div:first-child {
+    width: 32vw;
+    margin-bottom: 76px;
+}
+
+.circleConteiner {
+    display: flex;
+    max-width: 80vw;
+    flex-wrap: wrap;
+}
+
+.circleConteiner div {
+    margin-right: 2px;
+    margin-bottom: 25px;
+}
