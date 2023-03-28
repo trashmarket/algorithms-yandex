@@ -15,7 +15,7 @@ export const StringComponent: React.FC = () => {
   const [startEnd, setStartEnd] = useState<any[]>([null, null]);
   const [loder, setLoder] = useState(false);
   const [disable, setDisable] = useState(true);
-
+  (StringComponent as any).inputValue = inputValue; 
   useEffect(() => {
     setTimeout(() => {
       if (typeof startEnd[0] === 'number' && typeof startEnd[1] === 'number') {
@@ -111,10 +111,10 @@ export const StringComponent: React.FC = () => {
       <Wrapper>
         <form className={styles.inputWarapper} onSubmit={onSubmit}>
           <Input  max={11} isLimitText={true} maxLength={11} name='textFied' onChange={handlerOnChange}/>
-          <Button text="Развернуть" type='submit' isLoader={loder} disabled={disable}/>
+          <Button data-testid='button' text="Развернуть" type='submit' isLoader={loder} disabled={disable}/>
         </form> 
-        <div className={styles.circleConteiner}>
-          {inputValue.map((item, index) => <Circle letter={item.letter} state={item.state} key={item.index}/>)} 
+        <div data-testid='output' className={styles.circleConteiner}>
+          {inputValue.map((item, index) => <Circle data-testid='circle' letter={item.letter} state={item.state} key={item.index}/>)} 
         </div>
       </Wrapper>
     </SolutionLayout>
