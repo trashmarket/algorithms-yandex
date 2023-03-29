@@ -69,7 +69,7 @@ export const FibonacciPage: React.FC = () => {
      <Wrapper>
       <form className={styles.formWrapper} onSubmit={handlerSubmit}>
         <Input type="number" min='1' max='19' isLimitText={true} name="numInput" onChange={handlerOnChange}/>
-        <Button text="Развернуть" type='submit' isLoader={loder} disabled={disable} />
+        <Button text="Развернуть" type='submit' isLoader={loder} disabled={disable} data-testid="button" />
       </form>
       <div className={styles.circleConteiner}>
         {numArray.map((item => <Circle key={item.index} letter={String(item.fibNum)} tail={String(item.index)  }/>))}        

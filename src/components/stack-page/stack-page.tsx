@@ -8,8 +8,7 @@ import { Circle } from "../ui/circle/circle";
 import { Input } from "../ui/input/input";
 import styles from "./stack-page.module.css";
 import { ElementStates } from "../../types/element-states";
-import { setState } from "../../utils/utils";
-// Этот комментарий на счет спинира в Очередь и Стек Там даже на видео посмотри его там нет просто********
+import { setState } from "../../utils/utils"; 
 export const StackPage: React.FC = () => { 
   const [stack, setStack] = useState<IStack<string>>(new Stack<string>());
   const [value, setValue] = useState("");
@@ -55,11 +54,12 @@ export const StackPage: React.FC = () => {
               isLimitText={true}
               onChange={handlerChangeInput}
               value={value}
+              data-testid="input"
             />
-            <Button text="Добавить" onClick={pushStack} disabled={!value ? true : false}/>
-            <Button text="Удалить" onClick={popStack} disabled={stack.peak() ? false : true}/>
+            <Button text="Добавить" data-testid="button" onClick={pushStack} disabled={!value ? true : false}/>
+            <Button text="Удалить" data-testid="buttonDell" onClick={popStack} disabled={stack.peak() ? false : true}/>
           </fieldset>
-          <Button text="Очистить" onClick={clearStack} disabled={stack.peak() ? false : true}/>
+          <Button text="Очистить" data-testid="buttonCliner" onClick={clearStack} disabled={stack.peak() ? false : true}/>
         </form>
         <div className={styles.circleContainer}>
           {stack.elements().map((item, index) => (
