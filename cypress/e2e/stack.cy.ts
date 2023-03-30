@@ -34,15 +34,4 @@ describe('test stack', () => {
     cy.get('@circles').should('not.exist');
 
   })
-
-  // it('remove element check', () => {
-
-    // cy.get('[data-testid=buttonDell]').click();
-  //   // cy.get('[data-testid="testCicrle"]').as('circles');
-  //   // cy.get('@circles').children().eq(1).should(($div) => should($div, /circle_changing__/));
-  //   // cy.wait(1000);
-  //   // cy.get('@circles').children().eq(1).should('not.exist');
-  //   // cy.get('[data-testid=buttonDell]').should('be.disabled');
-
-  // })
 })
