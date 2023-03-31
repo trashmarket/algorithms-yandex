@@ -26,6 +26,20 @@ exports[`button test ui button disabled 2`] = `
 </button>
 `;
 
+exports[`button test ui button is loder 1`] = `
+<button
+  class="text text_type_button text_color_primary button undefined loader "
+  disabled=""
+  type="button"
+>
+  <img
+    alt="Загрузка."
+    class="loader_icon"
+    src="loader.svg"
+  />
+</button>
+`;
+
 exports[`button test ui button with text 1`] = `
 <button
   class="text text_type_button text_color_primary button undefined false "
@@ -46,6 +60,52 @@ exports[`button test ui button without text 1`] = `
 >
   <p
     class="text undefined"
+  />
+</button>
+`;
+
+exports[`button test ui check linkedList big button 1`] = `
+<button
+  class="text text_type_button text_color_primary button big false "
+  type="button"
+>
+  <p
+    class="text undefined"
+  />
+</button>
+`;
+
+exports[`button test ui check linkedList small button 1`] = `
+<button
+  class="text text_type_button text_color_primary button small false "
+  type="button"
+>
+  <p
+    class="text undefined"
+  />
+</button>
+`;
+
+exports[`button test ui check sorting button 1`] = `
+<button
+  class="text text_type_button text_color_primary button undefined false "
+  type="button"
+>
+  <svg
+    fill="inherit"
+    height="12"
+    viewBox="0 0 20 12"
+    width="20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M1 0C0.447715 0 0 0.447715 0 1C0 1.55228 0.447715 2 1 2H11C11.5523 2 12 1.55228 12 1C12 0.447715 11.5523 0 11 0H1ZM0 6C0 5.44772 0.447715 5 1 5H15C15.5523 5 16 5.44772 16 6C16 6.55228 15.5523 7 15 7H1C0.447715 7 0 6.55228 0 6ZM0 11C0 10.4477 0.447715 10 1 10H19C19.5523 10 20 10.4477 20 11C20 11.5523 19.5523 12 19 12H1C0.447716 12 0 11.5523 0 11Z"
+      fill="inherit"
+      fill-opacity="0.85"
+    />
+  </svg>
+  <p
+    class="text ml-5"
   />
 </button>
 `;

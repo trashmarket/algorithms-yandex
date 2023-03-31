@@ -1,7 +1,7 @@
 import { render, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Button, ButtonProps } from "./button";
-
+import { Direction } from "../../../types/direction";
 describe("button test ui", () => {
 
   it("button with text", () => {
@@ -22,7 +22,7 @@ describe("button test ui", () => {
     expect(butto).toMatchSnapshot();
   })
 
-  it('button disabled', () => {
+  it('button is loder', () => {
     const { getByRole } = render(<Button isLoader={true}/>);
     const butto = getByRole('button');
     expect(butto).toMatchSnapshot();
@@ -39,5 +39,26 @@ describe("button test ui", () => {
 
     expect(mockHandleClick).toBeCalled();
 
+  })
+
+  it('check sorting button', () => {
+    const { getByRole } = render(<Button sorting={Direction.Ascending}/>);
+    const button = getByRole('button');
+
+    expect(button).toMatchSnapshot();
+  })
+
+  it('check linkedList small button', () => {
+    const { getByRole } = render(<Button linkedList="small"/>);
+    const button = getByRole('button');
+
+    expect(button).toMatchSnapshot();
+  })
+
+  it('check linkedList big button', () => {
+    const { getByRole } = render(<Button linkedList="big"/>);
+    const button = getByRole('button');
+
+    expect(button).toMatchSnapshot();
   })
 });
