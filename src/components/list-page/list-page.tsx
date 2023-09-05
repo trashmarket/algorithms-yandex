@@ -255,6 +255,7 @@ export const ListPage: React.FC = () => {
               isLimitText={true}
               value={textInput}
               onChange={handlerChange}
+              data-testid="input"
             />
             <Button
               disabled={
@@ -263,6 +264,7 @@ export const ListPage: React.FC = () => {
               text="Добавить в head"
               onClick={handlerClickHead}
               isLoader={loderAddHead}
+              data-testid="buttonHead"
             />
             <Button
               disabled={
@@ -271,6 +273,7 @@ export const ListPage: React.FC = () => {
               text="Добавить в tail"
               onClick={handlerClickTail}
               isLoader={loaderAddTail}
+              data-testid="buttonTail"
             />
             <Button
               text="Удалить из head"
@@ -283,6 +286,7 @@ export const ListPage: React.FC = () => {
                   ? true
                   : false
               }
+              data-testid="buttonDellHead"
             />
             <Button
               text="Удалить из tail"
@@ -295,6 +299,7 @@ export const ListPage: React.FC = () => {
                   ? true
                   : false
               }
+              data-testid="buttonDellTail"
             />
           </fieldset>
           <fieldset className={styles.fieldset}>
@@ -302,6 +307,7 @@ export const ListPage: React.FC = () => {
               value={currentIndex}
               onChange={handlerChangeCurrentIndex}
               type="number"
+              data-testid="inputIndex"
             />
             <Button
               text="Добавить по индексу"
@@ -317,6 +323,7 @@ export const ListPage: React.FC = () => {
                   ? true
                   : false
               }
+              data-testid="buttonIndexAdd"
             />
             <Button
               text="Удалить по индексу"
@@ -332,6 +339,7 @@ export const ListPage: React.FC = () => {
                   ? true
                   : false
               }
+              data-testid="buttonIndexDell"
             />
           </fieldset>
         </form>

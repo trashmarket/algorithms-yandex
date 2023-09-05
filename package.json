@@ -5,7 +5,6 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.4.0",
     "@types/node": "^16.11.22",
     "@types/react": "^17.0.39",
@@ -22,10 +21,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "cypress": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -46,8 +46,10 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/user-event": "^14.4.3",
     "@types/react-router-dom": "^5.3.3",
+    "cypress": "^12.8.1",
     "gh-pages": "^5.0.0"
   },
-  "homepage": "https://trashmarket.github.io/algorithms-yandex/"
+  "homepage": "./"
 }

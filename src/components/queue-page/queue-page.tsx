@@ -62,25 +62,28 @@ export const QueuePage: React.FC = () => {
               isLimitText={true}
               onChange={handlerOnChange}
               value={value}
+              data-testid="input"
             />
             <Button
               text="Добавить"
               onClick={setEnqueue}
               disabled={!value ? true : false}
               extraClass='ml-5'
+              data-testid="button"
             />
             <Button
               text="Удалить"
               onClick={setDequeue}
               disabled={queue.isEmpty() ? true : false}
               extraClass='ml-5'
-
+              data-testid="buttonDell"
             />
           </fieldset>
           <Button
             text="Очистить"
             disabled={queue.getHead() || queue.getTail() ? false : true}
             onClick={clear}
+            data-testid="buttonClear"
           />
         </form>
         <div className={styles.circleContainer}>
