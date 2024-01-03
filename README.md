@@ -8,7 +8,7 @@
 
 **🌐 Link**
 
-[Algoritms-Yandex](https://algorithms-yandex-lqzct206r-trashmarket.vercel.app/)
+[Algoritms-Yandex](https://algorithms-yandex.vercel.app/)
 
 **📙Introduction**
 
